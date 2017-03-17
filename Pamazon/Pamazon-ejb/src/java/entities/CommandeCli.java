@@ -31,7 +31,7 @@ import javax.persistence.TemporalType;
 })
 public class CommandeCli implements Serializable {
 
-    private enum Etat {
+    protected enum Etat {
         VALIDE,
         AQUITTE,
         EN_PREPARATION,
