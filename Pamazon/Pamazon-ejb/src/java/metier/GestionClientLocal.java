@@ -15,4 +15,5 @@ import javax.ejb.Local;
 public interface GestionClientLocal {
     
     public void creerClient(String nom, String email, String mdp);
+
 }

@@ -27,4 +27,5 @@ public class GestionClient implements GestionClientLocal {
         client.setMdpClient(mdp);
         clientFacede.create(client);
     }
+
 }
