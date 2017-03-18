@@ -14,6 +14,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
@@ -26,9 +27,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "COMMANDECLI")
-@SecondaryTable(name = "CLIENT", pkJoinColumns={
-@PrimaryKeyJoinColumn(name = "idClient")
-})
+
 public class CommandeCli implements Serializable {
 
     protected enum Etat {
@@ -44,8 +43,9 @@ public class CommandeCli implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idCmdCli", nullable = false)
     private Integer idCmdCli;
-    @Column(name = "idClient", table = "CLIENT")
-    private Integer idClient;
+   
+    @ManyToOne
+    private Client client;
     @Column(name = "montantCmdCli", nullable = false)
     private double montantCmdCli;
     @Column(name = "etatCmdCli", nullable = false)
@@ -67,13 +67,15 @@ public class CommandeCli implements Serializable {
         this.idCmdCli = idCmdCli;
     }
 
-    public Integer getIdClient() {
-        return idClient;
+    public Client getClient() {
+        return client;
     }
 
-    public void setIdClient(Integer idClient) {
-        this.idClient = idClient;
+    public void setClient(Client client) {
+        this.client = client;
     }
+
+  
 
     public double getMontantCmdCli() {
         return montantCmdCli;

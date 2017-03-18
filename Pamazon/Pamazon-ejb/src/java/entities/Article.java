@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
@@ -23,9 +24,6 @@ import javax.validation.constraints.Min;
  */
 @Entity
 @Table(name = "ARTICLE")
-@SecondaryTable(name = "TYPE", pkJoinColumns={
-@PrimaryKeyJoinColumn(name = "idType")
-})
 public class Article implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,8 +31,8 @@ public class Article implements Serializable {
     @Column(name = "idArticle", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idArticle;
-    @Column(name = "idType", table = "ARTICLE")
-    private Integer idType;
+    @OneToOne
+    private Type idType;
     @Column(name = "nomArticle", nullable = false)
     private String nomArticle;
     @Column(name = "prixArticle", nullable = false)
@@ -58,14 +56,15 @@ public class Article implements Serializable {
         this.idArticle = idArticle;
     }
 
-    public Integer getIdType() {
+    public Type getIdType() {
         return idType;
     }
 
-    public void setIdType(Integer idType) {
+    public void setIdType(Type idType) {
         this.idType = idType;
     }
 
+   
     public String getNomArticle() {
         return nomArticle;
     }

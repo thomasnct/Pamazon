@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
@@ -21,9 +22,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "CLIENT")
-@SecondaryTable(name = "BANQUE", pkJoinColumns={
-@PrimaryKeyJoinColumn(name = "idCompte")
-})
 public class Client implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,21 +31,21 @@ public class Client implements Serializable {
     private Integer idClient;
     @Column(name = "nomClient", nullable = false)
     private String nomClient; 
-    @Column(name = "prenomClient", nullable = false)
+    @Column(name = "prenomClient", nullable = true)
     private String prenomClient;
     @Column(name = "mdpClient", nullable = false)
     private String mdpClient;
     @Column(name = "mailClient", nullable = false)
     private String mailClient;
-    @Column(name = "adresseClient", nullable = false)
+    @Column(name = "adresseClient", nullable = true)
     private String adresseClient; 
-    @Column(name = "villeClient", nullable = false)
+    @Column(name = "villeClient", nullable = true)
     private String villeClient;
-    @Column(name = "cpClient", nullable = false)
+    @Column(name = "cpClient", nullable = true)
     private String cpClient;
     
-    @Column(name = "idCompte", table = "COMTE")
-    private Integer idCompte;
+    @OneToOne
+    private Banque compte;
 
     public Client() {
         super();
@@ -109,14 +107,15 @@ public class Client implements Serializable {
         this.cpClient = cpClient;
     }
 
-    public Integer getIdCompte() {
-        return idCompte;
+    public Banque getCompte() {
+        return compte;
     }
 
-    public void setIdCompte(Integer idCompte) {
-        this.idCompte = idCompte;
+    public void setCompte(Banque compte) {
+        this.compte = compte;
     }
-    
+
+  
     
     
     

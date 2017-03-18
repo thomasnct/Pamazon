@@ -27,7 +27,7 @@ public class Banque implements Serializable {
     @Column(name = "idCompte", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idCompte;
-    @Column(name = "idCompte", nullable = false)
+    @Column(name = "soldeCompte", nullable = false)
     @Min(0)
     private double soldeCompte;
  

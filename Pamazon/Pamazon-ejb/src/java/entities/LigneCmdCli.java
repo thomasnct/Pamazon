@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.SecondaryTables;
@@ -23,20 +24,19 @@ import javax.validation.constraints.Min;
  */
 @Entity
 @Table(name = "LIGNECMDCLI")
-@SecondaryTables({
-  @SecondaryTable(name="COMMANDECLI",
-     pkJoinColumns={@PrimaryKeyJoinColumn(name="idCmdCli")}),
-  @SecondaryTable(name="ARTICLE",
-     pkJoinColumns={@PrimaryKeyJoinColumn (name="idArticle")})
-})
 public class LigneCmdCli implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Column(name = "idCmdCli", table = "COMMANDECLI")
-    private Integer idCmdCli;
-    @Column(name = "idArticle", table = "ARTICLE")
-    private Integer idArticle;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer idLigneCom;
+    
+    
+    @OneToOne
+    private CommandeCli cmdCli;
+    
+    @OneToOne
+    private  Article article;
     @Column(name = "qteArticle", nullable = false)
     @Min(0)
     private Integer qteArticle;
@@ -48,21 +48,31 @@ public class LigneCmdCli implements Serializable {
         super();
     }
 
-    public Integer getIdCmdCli() {
-        return idCmdCli;
+    public Integer getIdLigneCom() {
+        return idLigneCom;
     }
 
-    public void setIdCmdCli(Integer idCmdCli) {
-        this.idCmdCli = idCmdCli;
+    public void setIdLigneCom(Integer idLigneCom) {
+        this.idLigneCom = idLigneCom;
     }
 
-    public Integer getIdArticle() {
-        return idArticle;
+    public CommandeCli getCmdCli() {
+        return cmdCli;
     }
 
-    public void setIdArticle(Integer idArticle) {
-        this.idArticle = idArticle;
+    public void setCmdCli(CommandeCli cmdCli) {
+        this.cmdCli = cmdCli;
     }
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
+    }
+ 
+   
 
     public Integer getQteArticle() {
         return qteArticle;
@@ -85,7 +95,7 @@ public class LigneCmdCli implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idCmdCli != null ? idCmdCli.hashCode() : 0);
+        hash += (idLigneCom != null ? idLigneCom.hashCode() : 0);
         return hash;
     }
 
@@ -96,8 +106,8 @@ public class LigneCmdCli implements Serializable {
             return false;
         }
         LigneCmdCli other = (LigneCmdCli) object;
-        if ((this.idCmdCli == null && other.idCmdCli != null) 
-           || (this.idCmdCli != null && !this.idCmdCli.equals(other.idCmdCli))) {
+        if ((this.idLigneCom == null && other.idLigneCom != null) 
+           || (this.idLigneCom != null && !this.idLigneCom.equals(other.idLigneCom))) {
             return false;
         }
         return true;
@@ -105,7 +115,7 @@ public class LigneCmdCli implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.LigneCmdCli[ id=" + idCmdCli + " ]";
+        return "entities.LigneCmdCli[ id=" + idLigneCom + " ]";
     }
     
 }
